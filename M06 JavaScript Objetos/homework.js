@@ -7,6 +7,15 @@ function crearGato(nombre, edad) {
    // La propiedad "meow" será una función que retorne el string: "Meow!".
    // Retornar el objeto.
    // Tu código:
+   var obj={
+      nombre: nombre,
+      edad: edad,
+      meow: function(){
+         return "Meow!";
+      }
+
+   }
+    return obj;
 }
 
 function nuevoUsuario(nombre, email, password) {
@@ -14,6 +23,12 @@ function nuevoUsuario(nombre, email, password) {
    // Este debe tener las propiedades: "nombre", "email" y "password" con sus respectivos valores.
    // Retornar el objeto.
    // Tu código:
+   var obj={
+      nombre: nombre,
+      email: email,
+      password: password,
+   };
+   return obj;
 }
 
 function agregarPropiedad(objeto, propiedad) {
@@ -22,6 +37,9 @@ function agregarPropiedad(objeto, propiedad) {
    // Esta propiedad será igual al valor `null`.
    // Retornar el objeto.
    // Tu código:
+   
+   objeto[propiedad] = null;
+   return objeto
 }
 
 function invocarMetodo(objeto, metodo) {
@@ -29,36 +47,57 @@ function invocarMetodo(objeto, metodo) {
    // Esta propiedad contiene una función en su interior. Debes invocarla/ejecutarla.
    // [NOTA]: no necesitar retornar nada.
    // Tu código:
+   objeto[metodo]();
 }
 
 function multiplicarNumeroDesconocidoPorCinco(objetoMisterioso) {
    // El parámetro "objetoMisterioso" posee una propiedad con el nombre "numeroMisterioso".
    // Debes multiplicar este número por 5 y retornar el resultado.
    // Tu código:
+   
+   return (objetoMisterioso.numeroMisterioso) * 5
+
 }
 
 function eliminarPropiedad(objeto, propiedad) {
    // El parámetro "propiedad" es una propiedad del objeto que recibes.
    // Debes eliminarla del objeto y retornarlo finalmente.
    // Tu código:
+   delete objeto[propiedad];
+   return objeto;
 }
 
 function tieneEmail(objetoUsuario) {
    // Verifica si el "objetoUsuario", en su propiedad "email", posee un valor definido.
-   // En ese caso retornar true. Caso contrario, false.
+   // En ese caso retornar True. Caso contrario, False.
    // Tu código:
+   
+   if (objetoUsuario["email"]){
+      return true;
+   }else{
+      return false;
+   }
 }
 
 function tienePropiedad(objeto, propiedad) {
    // Verifica si el objeto recibido posee una propiedad con el mismo nombre que el parámetro "propiedad".
-   // En ese caso retornar true. Caso contrario, false.
+   // En ese caso retornar True. Caso contrario, False.
    // Tu código:
+   if(objeto[propiedad]){
+      return true;
+   }else{
+      return false;
+   }
 }
 
 function verificarPassword(objetoUsuario, password) {
    // Verifica si la propiedad "password" del "objetoUsuario" coincide con el parámetro "password".
-   // En ese caso retornar true. Caso contrario, false.
+   // En ese caso retornar True. Caso contrario, False.
    // Tu código:
+   if(objetoUsuario["password"]===(password)){
+      return true;
+   }else
+      return false;
 }
 
 function actualizarPassword(objetoUsuario, nuevaPassword) {
@@ -66,6 +105,8 @@ function actualizarPassword(objetoUsuario, nuevaPassword) {
    // La nueva contraseña la recibes por parámetro.
    // Retornar el objeto.
    // Tu código:
+   objetoUsuario.password=nuevaPassword;
+   return objetoUsuario;
 }
 
 function agregarAmigo(objetoUsuario, nuevoAmigo) {
@@ -73,14 +114,26 @@ function agregarAmigo(objetoUsuario, nuevoAmigo) {
    // Debes agregar el "nuevoAmigo" al final de este arreglo.
    // Retornar el objeto.
    // Tu código:
+   objetoUsuario.amigos.push(nuevoAmigo);
+   return objetoUsuario;
 }
 
 function pasarUsuarioAPremium(objetoMuchosUsuarios) {
    // El parámetro "objetoMuchosUsuarios" es un arreglo de objetos (usuarios).
    // Cada usuario tiene una propiedad llamada "esPremium".
-   // Define esta propiedad de todos los usuarios como true.
+   // Define esta propiedad de todos los usuarios como True.
    // Retornar el arreglo.
    // Tu código:
+
+   //for (var i=0; i<objetoMuchosUsuarios.length; i++){
+   //   objetoMuchosUsuarios[i].esPremium=true;
+   //}
+   //return objetoMuchosUsuarios;
+   // or //
+   objetoMuchosUsuarios.forEach(function(usuarios) {
+      usuarios.esPremium = true;
+    });
+    return objetoMuchosUsuarios;
 }
 
 function sumarLikesDeUsuario(objetoUsuario) {
@@ -89,7 +142,18 @@ function sumarLikesDeUsuario(objetoUsuario) {
    // Cada post posee una propiedad llamada "likes". Esta propiedad es un número.
    // Debes sumar los likes de todos los post y retornar el resultado.
    // Tu código:
+
+   var Mlikes = 0;
+   posts.forEach(function(likes){
+      Mlikes += likes.post;   
+   })
+   return Mlikes
+
+   // or /
+   //let Mlikes = objetoUsuario.reduce((acumulador, actual) => acumulador + actual.post, 0);
+   
 }
+sumarLikesDeUsuario(posts=[{post: 100}, {post: 100}, {post: 86}])
 
 function agregarMetodoCalculoDescuento(objetoProducto) {
    // Agrega una propiedad al "objetoProducto" con el nombre "calcularPrecioDescuento".
@@ -97,12 +161,14 @@ function agregarMetodoCalculoDescuento(objetoProducto) {
    // El "objetoProducto" posee una propiedad "precio" y una propiedad "porcentajeDeDescuento".
    // Luego debes restar del precio total del producto ese valor de descuento.
    // Retornar el precio final.
-   // Ejemplo:
-   // Precio ---> 10
-   // PorcentajeDeDescuento ---> 0.2
-   // Precio final ---> 8
+   // Ejemplo: // Precio ---> 10  // PorcentajeDeDescuento ---> 0.2  // Precio final ---> 8
    // Tu código:
-}
+   objetoProducto.calcularPrecioDescuento=function(){
+      return this.precio-(this.porcentajeDeDescuento*this.precio);
+   }
+   return objetoProducto
+
+}   
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
 module.exports = {
