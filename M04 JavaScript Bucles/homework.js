@@ -173,27 +173,17 @@ function esPrimo(num) {
    // [Pista 2]: puedes resolverlo utilizando un `bucle for`.
    // [Nota]: los números negativos, 0 y 1 NO son números primos.
    // Tu código:
-   //let c=0
-   //if (num === 0 || num === 1 || num === 4){
-   // return false
-  //}
-   
-    for (let c=2; c<num/2; c++) {        
-      //console.log(c);
-      //console.log(num);
-
-      //console.log(num % c);
-      if(num % c === 0){
-        //console.log("No primo");
-        return false;
-      }
-    }
-  
-      //console.log("primo");
+  //if (num < 2 ) return false;
+  //if (num === 2) return true;
+ 
+  if (num < 2 || num === 2) return false;
+  for (var i=2; i<num; i++) {
+    if (num%i===0){ 
+      return false;}}
       return true;
 }
-esPrimo(257);
 esPrimo(250);
+//esPrimo(257);
 
 function esVerdadero(valor) {
    // Si "valor" es verdadero retornar "Soy verdadero".
